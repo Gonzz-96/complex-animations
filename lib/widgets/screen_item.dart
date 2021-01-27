@@ -23,13 +23,17 @@ class ScreenItem extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => entry.value));
             },
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                entry.key,
-                style: TextStyle(
+              padding: const EdgeInsets.all(5.0),
+              child: ListTile(
+                trailing: Icon(Icons.chevron_right),
+                title: Text(
+                  entry.key,
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
             ),
           ),
