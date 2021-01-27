@@ -24,10 +24,16 @@ class _CrossScreenState extends State<CrossScreen>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final squareSize = size.width * 0.34;
-    final space = size.width * 0.02;
+    final space = size.width * 0.05;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -35,7 +41,7 @@ class _CrossScreenState extends State<CrossScreen>
         alignment: Alignment.center,
         children: [
           _CirclesCanvas(squareSize: squareSize, space: space),
-          SquaresAnimation(squareSize, controller)
+          SquaresAnimation(squareSize + 30, controller)
         ],
       ),
     );
