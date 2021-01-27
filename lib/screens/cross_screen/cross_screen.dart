@@ -30,6 +30,7 @@ class _CrossScreenState extends State<CrossScreen>
     final space = size.width * 0.02;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         alignment: Alignment.center,
         children: [

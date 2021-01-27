@@ -11,23 +11,17 @@ class SquaresAnimation extends StatelessWidget {
   SquaresAnimation(
     this.size,
     this.controller,
-  )   : clockwiseCrossRotation = Tween(begin: 0.0, end: pi / 2).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: Interval(0.25, 0.50, curve: _curve),
-          ),
-        ),
-        counterClockwiseCrossRotation = Tween(begin: 0.0, end: pi / 2).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: Interval(0.75, 1, curve: _curve),
-          ),
-        ),
-        clockwiseSquaresRotation =
+  )   : clockwiseSquaresRotation =
             Tween(begin: 0.0, end: -pi / 4 + 0.34).animate(
           CurvedAnimation(
             parent: controller,
             curve: Interval(0.0, 0.25, curve: _curve),
+          ),
+        ),
+        clockwiseCrossRotation = Tween(begin: 0.0, end: pi / 2).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.25, 0.50, curve: _curve),
           ),
         ),
         counterClockwiseSquaresRotation =
@@ -35,6 +29,12 @@ class SquaresAnimation extends StatelessWidget {
           CurvedAnimation(
             parent: controller,
             curve: Interval(0.50, 0.75, curve: _curve),
+          ),
+        ),
+        counterClockwiseCrossRotation = Tween(begin: 0.0, end: pi / 2).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.75, 1, curve: _curve),
           ),
         );
 
@@ -72,7 +72,7 @@ class SquaresAnimation extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: Transform.rotate(
-                  child: _Square(size: squareSize),
+                  child: _Rectangle(height: squareSize + 10, width: squareSize),
                   origin: Offset(-squareSize / 2, -squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -82,7 +82,7 @@ class SquaresAnimation extends StatelessWidget {
                 top: 0,
                 right: 0,
                 child: Transform.rotate(
-                  child: _Square(color: Colors.green, size: squareSize),
+                  child: _Rectangle(height: squareSize, width: squareSize + 10),
                   origin: Offset(squareSize / 2, -squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -92,7 +92,7 @@ class SquaresAnimation extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 child: Transform.rotate(
-                  child: _Square(size: squareSize, color: Colors.green),
+                  child: _Rectangle(width: squareSize + 10, height: squareSize),
                   origin: Offset(-squareSize / 2, squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -102,7 +102,7 @@ class SquaresAnimation extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: Transform.rotate(
-                  child: _Square(size: squareSize),
+                  child: _Rectangle(height: squareSize + 10, width: squareSize),
                   origin: Offset(squareSize / 2, squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -116,11 +116,15 @@ class SquaresAnimation extends StatelessWidget {
   }
 }
 
-class _Square extends StatelessWidget {
+class _Rectangle extends StatelessWidget {
+  final double width;
+  final double height;
   final double size;
   final Color color;
 
-  _Square({
+  _Rectangle({
+    this.width = 100,
+    this.height = 100,
     this.size = 100,
     this.color = Colors.blue,
   });
@@ -128,8 +132,8 @@ class _Square extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
-      height: size,
+      width: width,
+      height: height,
       color: Colors.white,
     );
   }
