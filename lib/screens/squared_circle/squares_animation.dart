@@ -22,10 +22,27 @@ class SquaresAnimation extends StatelessWidget {
             parent: controller,
             curve: Interval(0.75, 1, curve: _curve),
           ),
+        ),
+        clockwiseSquaresRotation =
+            Tween(begin: 0.0, end: -pi / 4 + 0.34).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.0, 0.25, curve: _curve),
+          ),
+        ),
+        counterClockwiseSquaresRotation =
+            Tween(begin: 0.0, end: -pi / 4 + 0.34).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.50, 0.75, curve: _curve),
+          ),
         );
 
   final Animation<double> clockwiseCrossRotation;
   final Animation<double> counterClockwiseCrossRotation;
+
+  final Animation<double> clockwiseSquaresRotation;
+  final Animation<double> counterClockwiseSquaresRotation;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +65,7 @@ class SquaresAnimation extends StatelessWidget {
       child: LayoutBuilder(
         builder: (_, constraints) {
           final size = constraints.biggest;
-          final squareSize = size.height / 2 - 5;
+          final squareSize = size.height / 2 - 2;
           return Stack(
             children: [
               Positioned(
@@ -57,7 +74,8 @@ class SquaresAnimation extends StatelessWidget {
                 child: Transform.rotate(
                   child: _Square(size: squareSize),
                   origin: Offset(-squareSize / 2, -squareSize / 2),
-                  angle: -pi / 4 + 0.34,
+                  angle: clockwiseSquaresRotation.value -
+                      counterClockwiseSquaresRotation.value,
                 ),
               ),
               Positioned(
@@ -66,7 +84,8 @@ class SquaresAnimation extends StatelessWidget {
                 child: Transform.rotate(
                   child: _Square(color: Colors.green, size: squareSize),
                   origin: Offset(squareSize / 2, -squareSize / 2),
-                  angle: -pi / 4 + 0.34,
+                  angle: clockwiseSquaresRotation.value -
+                      counterClockwiseSquaresRotation.value,
                 ),
               ),
               Positioned(
@@ -75,7 +94,8 @@ class SquaresAnimation extends StatelessWidget {
                 child: Transform.rotate(
                   child: _Square(size: squareSize, color: Colors.green),
                   origin: Offset(-squareSize / 2, squareSize / 2),
-                  angle: -pi / 4 + 0.34,
+                  angle: clockwiseSquaresRotation.value -
+                      counterClockwiseSquaresRotation.value,
                 ),
               ),
               Positioned(
@@ -84,7 +104,8 @@ class SquaresAnimation extends StatelessWidget {
                 child: Transform.rotate(
                   child: _Square(size: squareSize),
                   origin: Offset(squareSize / 2, squareSize / 2),
-                  angle: -pi / 4 + 0.34,
+                  angle: clockwiseSquaresRotation.value -
+                      counterClockwiseSquaresRotation.value,
                 ),
               ),
             ],
