@@ -1,4 +1,3 @@
-import 'package:complex_animations/screens/squared_circle/squared_circle_screen.dart';
 import 'package:flutter/material.dart';
 
 class ScreenItem extends StatelessWidget {
@@ -7,7 +6,7 @@ class ScreenItem extends StatelessWidget {
     this.shouldHaveDivider = false,
   });
 
-  final MapEntry<String, SquaredCircleScreen> entry;
+  final MapEntry<String, Widget> entry;
   final bool shouldHaveDivider;
 
   @override
