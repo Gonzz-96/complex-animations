@@ -1,5 +1,6 @@
 import 'dart:math' as Math;
 
+import 'package:complex_animations/screens/squared_circle/squares_animation.dart';
 import 'package:complex_animations/widgets/squared_circle.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class CrossScreen extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           _CirclesCanvas(squareSize: squareSize, space: space),
+          SquaresAnimation(squareSize)
         ],
       ),
     );
