@@ -1,6 +1,6 @@
 import 'dart:math' as Math;
 
-import 'package:complex_animations/screens/squared_circle/squares_animation.dart';
+import 'package:complex_animations/screens/cross_screen/squares_animation.dart';
 import 'package:complex_animations/widgets/squared_circle.dart';
 import 'package:flutter/material.dart';
 
