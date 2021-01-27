@@ -55,12 +55,14 @@ class SquaredCircleAnimation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SquaredCircle(
+                sweepAngle: Math.pi * 1.5,
                 squareSize: squareSize,
                 rotationAngle:
                     Math.pi / 2 + _squaredCircleIndividualRotation.value,
               ),
               SizedBox(width: space),
               SquaredCircle(
+                sweepAngle: Math.pi * 1.5,
                 squareSize: squareSize,
                 rotationAngle: Math.pi + _squaredCircleIndividualRotation.value,
               ),
@@ -71,11 +73,13 @@ class SquaredCircleAnimation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SquaredCircle(
+                sweepAngle: Math.pi * 1.5,
                 squareSize: squareSize,
                 rotationAngle: _squaredCircleIndividualRotation.value,
               ),
               SizedBox(width: space),
               SquaredCircle(
+                sweepAngle: Math.pi * 1.5,
                 squareSize: squareSize,
                 rotationAngle:
                     3 * Math.pi / 2 + _squaredCircleIndividualRotation.value,

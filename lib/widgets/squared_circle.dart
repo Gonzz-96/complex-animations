@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class SquaredCircle extends StatelessWidget {
   final double squareSize;
   final double rotationAngle;
+  final double sweepAngle;
 
   const SquaredCircle({
     @required this.squareSize,
     this.rotationAngle = 0,
+    this.sweepAngle = Math.pi * 2,
   });
 
   @override
@@ -19,7 +21,7 @@ class SquaredCircle extends StatelessWidget {
         width: squareSize,
         height: squareSize,
         child: CustomPaint(
-          painter: _SquaredCirclePainter(),
+          painter: _SquaredCirclePainter(sweepAngle),
         ),
       ),
     );
@@ -27,6 +29,10 @@ class SquaredCircle extends StatelessWidget {
 }
 
 class _SquaredCirclePainter extends CustomPainter {
+  final double sweepAngle;
+
+  _SquaredCirclePainter(this.sweepAngle);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -40,7 +46,7 @@ class _SquaredCirclePainter extends CustomPainter {
           radius: size.width / 2,
         ),
         0,
-        Math.pi * 1.5,
+        sweepAngle,
       )
       ..lineTo(size.width / 2, size.height / 2);
 
