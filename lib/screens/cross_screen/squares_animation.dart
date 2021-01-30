@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'package:complex_animations/widgets/rectangle.dart';
+
 const _curve = Curves.easeInOutCubic;
 
 class SquaresAnimation extends StatelessWidget {
@@ -72,7 +74,7 @@ class SquaresAnimation extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: Transform.rotate(
-                  child: _Rectangle(height: squareSize + 10, width: squareSize),
+                  child: Rectangle(height: squareSize + 10, width: squareSize),
                   origin: Offset(-squareSize / 2, -squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -82,7 +84,7 @@ class SquaresAnimation extends StatelessWidget {
                 top: 0,
                 right: 0,
                 child: Transform.rotate(
-                  child: _Rectangle(height: squareSize, width: squareSize + 10),
+                  child: Rectangle(height: squareSize, width: squareSize + 10),
                   origin: Offset(squareSize / 2, -squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -92,7 +94,7 @@ class SquaresAnimation extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 child: Transform.rotate(
-                  child: _Rectangle(width: squareSize + 10, height: squareSize),
+                  child: Rectangle(width: squareSize + 10, height: squareSize),
                   origin: Offset(-squareSize / 2, squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -102,7 +104,7 @@ class SquaresAnimation extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: Transform.rotate(
-                  child: _Rectangle(height: squareSize + 10, width: squareSize),
+                  child: Rectangle(height: squareSize + 10, width: squareSize),
                   origin: Offset(squareSize / 2, squareSize / 2),
                   angle: clockwiseSquaresRotation.value -
                       counterClockwiseSquaresRotation.value,
@@ -112,29 +114,6 @@ class SquaresAnimation extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class _Rectangle extends StatelessWidget {
-  final double width;
-  final double height;
-  final double size;
-  final Color color;
-
-  _Rectangle({
-    this.width = 100,
-    this.height = 100,
-    this.size = 100,
-    this.color = Colors.blue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      color: Colors.white,
     );
   }
 }
