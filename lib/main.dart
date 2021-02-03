@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -42,19 +43,12 @@ class _AnimatedContainerScreenState extends State<AnimatedContainerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: AnimatedContainer(
-          duration: Duration(seconds: 1),
-          curve: Curves.easeInOutCubic,
-          color: currentValue.containerColor,
-          width: currentValue.dittoWidth,
-          height: currentValue.dittoHeight,
-          child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-        ),
+        child: AnimatedDitto(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _updateNewValues,
-        child: Icon(Icons.chevron_right),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _updateNewValues,
+      //   child: Icon(Icons.chevron_right),
+      // ),
       backgroundColor: Colors.white,
     );
   }
@@ -66,6 +60,37 @@ class _AnimatedContainerScreenState extends State<AnimatedContainerScreen> {
       } else {
         currentIndex += 1;
       }
+    });
+  }
+}
+
+class AnimatedDitto extends StatefulWidget {
+  @override
+  _AnimatedDittoState createState() => _AnimatedDittoState();
+}
+
+class _AnimatedDittoState extends State<AnimatedDitto> {
+  double opacity = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedOpacity(
+          child: Image.asset('assets/ditto.png',
+              fit: BoxFit.fill), // <--- The child
+          duration: Duration(seconds: 3), // <-- The duration
+          opacity: opacity, // <-- The value
+        ),
+        FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+      ],
+    );
+  }
+
+  void _changeOpacity() {
+    setState(() {
+      opacity = 1.0;
     });
   }
 }
