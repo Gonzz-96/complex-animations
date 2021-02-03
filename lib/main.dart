@@ -1,4 +1,5 @@
-import 'package:complex_animations/screens/splash_screen.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,26 +30,12 @@ class AnimatedContainerScreen extends StatefulWidget {
 }
 
 class _AnimatedContainerScreenState extends State<AnimatedContainerScreen> {
-  int currentIndex = 0;
-  final dittoValues = [
-    _DittoValues(100, 100, Colors.white),
-    _DittoValues(400, 400, Colors.blue),
-    _DittoValues(200, 200, Colors.purple),
-    _DittoValues(300, 300, Colors.red),
-  ];
-
-  _DittoValues get currentValue => dittoValues[currentIndex];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: AnimatedDitto(),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _updateNewValues,
-      //   child: Icon(Icons.chevron_right),
-      // ),
       backgroundColor: Colors.white,
     );
   }
@@ -60,10 +47,29 @@ class AnimatedDitto extends StatefulWidget {
 }
 
 class _AnimatedDittoState extends State<AnimatedDitto> {
-  var borderRadius = 0.0;
-  var backgroundColor = Colors.yellow;
-  var dittoHeight = 100.0;
-  var dittoWidth = 100.0;
+  int currentIndex = 0;
+  final dittoValues = [
+    _DittoValues(100, 100, Colors.white),
+    _DittoValues(400, 400, Colors.blue),
+    _DittoValues(200, 200, Colors.purple),
+    _DittoValues(300, 300, Colors.red),
+    _DittoValues(100, 100, Colors.pink),
+    _DittoValues(400, 400, Colors.green),
+    _DittoValues(200, 200, Colors.cyan),
+    _DittoValues(300, 300, Colors.orange),
+  ];
+
+  _DittoValues get currentValue => dittoValues[currentIndex];
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 500), () {
+      Timer.periodic(Duration(seconds: 1), (timer) {
+        _changeOpacity();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,27 +77,23 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AnimatedContainer(
-          height: dittoHeight,
-          width: dittoWidth,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
+          height: currentValue.dittoHeight,
+          width: currentValue.dittoWidth,
+          color: currentValue.containerColor,
           child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(seconds: 3),
+          duration: Duration(milliseconds: 500),
         ),
-        FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
       ],
     );
   }
 
   void _changeOpacity() {
     setState(() {
-      // new values to interpolate
-      backgroundColor = Colors.deepPurple;
-      borderRadius = 150.0;
-      dittoWidth = 300;
-      dittoHeight = 300;
+      if (currentIndex == dittoValues.length - 1) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
     });
   }
 }
