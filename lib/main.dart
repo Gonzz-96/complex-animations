@@ -47,19 +47,8 @@ class AnimatedDitto extends StatefulWidget {
 }
 
 class _AnimatedDittoState extends State<AnimatedDitto> {
-  int currentIndex = 0;
-  final dittoValues = [
-    _DittoValues(100, 100, Colors.white),
-    _DittoValues(400, 400, Colors.blue),
-    _DittoValues(200, 200, Colors.purple),
-    _DittoValues(300, 300, Colors.red),
-    _DittoValues(100, 100, Colors.pink),
-    _DittoValues(400, 400, Colors.green),
-    _DittoValues(200, 200, Colors.cyan),
-    _DittoValues(300, 300, Colors.orange),
-  ];
-
-  _DittoValues get currentValue => dittoValues[currentIndex];
+  double dittoHeight = 100;
+  double dittoWidth = 100;
 
   @override
   void initState() {
@@ -77,11 +66,12 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AnimatedContainer(
-          height: currentValue.dittoHeight,
-          width: currentValue.dittoWidth,
-          color: currentValue.containerColor,
+          curve: Curves.easeIn,
+          height: dittoHeight,
+          width: dittoWidth,
+          color: Colors.purple,
           child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 800),
         ),
       ],
     );
@@ -89,11 +79,8 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
 
   void _changeOpacity() {
     setState(() {
-      if (currentIndex == dittoValues.length - 1) {
-        currentIndex = 0;
-      } else {
-        currentIndex++;
-      }
+      dittoHeight = 400;
+      dittoWidth = 400;
     });
   }
 }
