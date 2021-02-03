@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,8 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
   double dittoHeight = 100;
   double dittoWidth = 100;
 
+  double margin = 0;
+
   @override
   void initState() {
     super.initState();
@@ -66,12 +69,13 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AnimatedContainer(
-          curve: Curves.easeIn,
+          transform: Matrix4.translationValues(0, margin, 0),
+          curve: SineCurve(frequency: 5),
           height: dittoHeight,
           width: dittoWidth,
           color: Colors.purple,
           child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(milliseconds: 800),
+          duration: Duration(seconds: 10),
         ),
       ],
     );
@@ -79,16 +83,18 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
 
   void _changeOpacity() {
     setState(() {
-      dittoHeight = 400;
-      dittoWidth = 400;
+      margin = -100;
     });
   }
 }
 
-class _DittoValues {
-  final double dittoHeight;
-  final double dittoWidth;
-  final Color containerColor;
+class SineCurve extends Curve {
+  final double frequency;
 
-  _DittoValues(this.dittoHeight, this.dittoWidth, this.containerColor);
+  SineCurve({this.frequency = 1});
+
+  @override
+  double transformInternal(double t) {
+    return sin(2 * pi * frequency * t);
+  }
 }
