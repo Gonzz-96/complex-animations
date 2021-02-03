@@ -52,16 +52,6 @@ class _AnimatedContainerScreenState extends State<AnimatedContainerScreen> {
       backgroundColor: Colors.white,
     );
   }
-
-  void _updateNewValues() {
-    setState(() {
-      if (currentIndex == dittoValues.length - 1) {
-        currentIndex = 0;
-      } else {
-        currentIndex += 1;
-      }
-    });
-  }
 }
 
 class AnimatedDitto extends StatefulWidget {
@@ -70,18 +60,21 @@ class AnimatedDitto extends StatefulWidget {
 }
 
 class _AnimatedDittoState extends State<AnimatedDitto> {
-  double opacity = 0.0;
+  var dittoHeight = 100.0;
+  var dittoWidth = 100.0;
+  var backgroundColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AnimatedOpacity(
-          child: Image.asset('assets/ditto.png',
-              fit: BoxFit.fill), // <--- The child
-          duration: Duration(seconds: 3), // <-- The duration
-          opacity: opacity, // <-- The value
+        AnimatedContainer(
+          height: dittoHeight,
+          width: dittoWidth,
+          color: backgroundColor,
+          child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+          duration: Duration(seconds: 3),
         ),
         FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
       ],
@@ -90,7 +83,10 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
 
   void _changeOpacity() {
     setState(() {
-      opacity = 1.0;
+      // new values to interpolate
+      dittoWidth = 300;
+      dittoHeight = 300;
+      backgroundColor = Colors.deepPurpleAccent;
     });
   }
 }
