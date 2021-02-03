@@ -60,9 +60,10 @@ class AnimatedDitto extends StatefulWidget {
 }
 
 class _AnimatedDittoState extends State<AnimatedDitto> {
+  var borderRadius = 0.0;
+  var backgroundColor = Colors.yellow;
   var dittoHeight = 100.0;
   var dittoWidth = 100.0;
-  var backgroundColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,10 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
         AnimatedContainer(
           height: dittoHeight,
           width: dittoWidth,
-          color: backgroundColor,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
           child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
           duration: Duration(seconds: 3),
         ),
@@ -84,9 +88,10 @@ class _AnimatedDittoState extends State<AnimatedDitto> {
   void _changeOpacity() {
     setState(() {
       // new values to interpolate
+      backgroundColor = Colors.deepPurple;
+      borderRadius = 150.0;
       dittoWidth = 300;
       dittoHeight = 300;
-      backgroundColor = Colors.deepPurpleAccent;
     });
   }
 }
