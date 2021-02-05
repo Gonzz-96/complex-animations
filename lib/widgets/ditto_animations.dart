@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -216,4 +217,108 @@ class _DittoValues {
   final Color containerColor;
 
   _DittoValues(this.dittoHeight, this.dittoWidth, this.containerColor);
+}
+
+//
+// FIGURE 6. Curves.easeIn demonstration
+//
+class CurvyDitto extends StatefulWidget {
+  @override
+  _CurvyDittoState createState() => _CurvyDittoState();
+}
+
+class _CurvyDittoState extends State<CurvyDitto> {
+  double dittoHeight = 100;
+  double dittoWidth = 100;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+            curve: Curves.easeIn,
+            height: dittoHeight,
+            width: dittoWidth,
+            color: Colors.purple,
+            child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+            duration: Duration(milliseconds: 800),
+          ),
+          FlatButton(onPressed: _changeOpacity, child: Text('Animate')),
+        ],
+      ),
+    );
+  }
+
+  void _changeOpacity() {
+    setState(() {
+      dittoHeight = 400;
+      dittoWidth = 400;
+    });
+  }
+}
+
+//
+// FIGURE 7. SineCurve
+//
+class SineDitto extends StatefulWidget {
+  @override
+  _SineDittoState createState() => _SineDittoState();
+}
+
+class _SineDittoState extends State<SineDitto> {
+  double dittoHeight = 100;
+  double dittoWidth = 100;
+
+  double margin = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 500), () {
+      _changeOpacity();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+            transform: Matrix4.translationValues(0, margin, 0),
+            curve: SineCurve(frequency: 200),
+            height: dittoHeight,
+            width: dittoWidth,
+            color: Colors.purple,
+            child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+            duration: Duration(seconds: 200),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _changeOpacity() {
+    setState(() {
+      margin = -100;
+    });
+  }
+}
+
+class SineCurve extends Curve {
+  final double frequency;
+
+  SineCurve({this.frequency = 1});
+
+  @override
+  double transformInternal(double t) {
+    return sin(2 * pi * frequency * t);
+  }
 }
