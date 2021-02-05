@@ -1,7 +1,4 @@
-import 'dart:async';
-import 'dart:math';
-
-import 'package:complex_animations/widgets/ditto_animations.dart';
+import 'package:complex_animations/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,84 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AnimatedContainerScreen(),
+      home: SplashScreen(),
     );
-  }
-}
-
-class AnimatedContainerScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          AnimatedOpacityDitto(),
-          SizedBox(height: 30),
-          AnimatedContainerDitto(),
-          SizedBox(height: 30),
-          AnimatedDecorationDitto(),
-          SizedBox(height: 30),
-          DancingDitto(),
-        ],
-      ),
-      backgroundColor: Colors.white,
-    );
-  }
-}
-
-class AnimatedDitto extends StatefulWidget {
-  @override
-  _AnimatedDittoState createState() => _AnimatedDittoState();
-}
-
-class _AnimatedDittoState extends State<AnimatedDitto> {
-  double dittoHeight = 100;
-  double dittoWidth = 100;
-
-  double margin = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    Timer(Duration(milliseconds: 500), () {
-      Timer.periodic(Duration(seconds: 1), (timer) {
-        _changeOpacity();
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedContainer(
-          transform: Matrix4.translationValues(0, margin, 0),
-          curve: SineCurve(frequency: 5),
-          height: dittoHeight,
-          width: dittoWidth,
-          color: Colors.purple,
-          child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(seconds: 10),
-        ),
-      ],
-    );
-  }
-
-  void _changeOpacity() {
-    setState(() {
-      margin = -100;
-    });
-  }
-}
-
-class SineCurve extends Curve {
-  final double frequency;
-
-  SineCurve({this.frequency = 1});
-
-  @override
-  double transformInternal(double t) {
-    return sin(2 * pi * frequency * t);
   }
 }
