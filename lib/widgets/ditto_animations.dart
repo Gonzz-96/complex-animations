@@ -15,19 +15,23 @@ class _AnimatedOpacityDittoState extends State<AnimatedOpacityDitto> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          child: AnimatedOpacity(
-            child: Image.asset('assets/ditto.png',
-                fit: BoxFit.fill), // <--- The child
-            duration: Duration(seconds: 3), // <-- The duration
-            opacity: opacity, // <-- The value
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.52,
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            child: AnimatedOpacity(
+              child: Image.asset('assets/ditto.png',
+                  fit: BoxFit.fill), // <--- The child
+              duration: Duration(seconds: 3), // <-- The duration
+              opacity: opacity, // <-- The value
+            ),
           ),
-        ),
-        FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
-      ],
+          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+        ],
+      ),
     );
   }
 
@@ -53,20 +57,24 @@ class _AnimatedContainerDittoState extends State<AnimatedContainerDitto> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          child: AnimatedContainer(
-            height: dittoHeight,
-            width: dittoWidth,
-            color: backgroundColor,
-            child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-            duration: Duration(seconds: 3),
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: AnimatedContainer(
+              height: dittoHeight,
+              width: dittoWidth,
+              color: backgroundColor,
+              child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+              duration: Duration(seconds: 3),
+            ),
           ),
-        ),
-        FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
-      ],
+          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+        ],
+      ),
     );
   }
 
@@ -97,20 +105,24 @@ class _AnimatedDecorationDittoState extends State<AnimatedDecorationDitto> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AnimatedContainer(
-          height: dittoHeight,
-          width: dittoWidth,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius),
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.5,
+      child: Column(
+        children: [
+          AnimatedContainer(
+            height: dittoHeight,
+            width: dittoWidth,
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+            duration: Duration(seconds: 3),
           ),
-          child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(seconds: 3),
-        ),
-        FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
-      ],
+          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+        ],
+      ),
     );
   }
 
@@ -134,6 +146,9 @@ class DancingDitto extends StatefulWidget {
 }
 
 class _DancingDittoState extends State<DancingDitto> {
+  Timer periodicTimer;
+  Timer timer;
+
   int currentIndex = 0;
   final dittoValues = [
     _DittoValues(100, 100, Colors.white),
@@ -151,26 +166,36 @@ class _DancingDittoState extends State<DancingDitto> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 500), () {
-      Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer(Duration(milliseconds: 500), () {
+      periodicTimer = Timer.periodic(Duration(seconds: 1), (timer) {
         _changeOpacity();
       });
     });
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    periodicTimer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedContainer(
-          height: currentValue.dittoHeight,
-          width: currentValue.dittoWidth,
-          color: currentValue.containerColor,
-          child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
-          duration: Duration(milliseconds: 500),
-        ),
-      ],
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.5,
+      child: Column(
+        children: [
+          AnimatedContainer(
+            height: currentValue.dittoHeight,
+            width: currentValue.dittoWidth,
+            color: currentValue.containerColor,
+            child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
+            duration: Duration(milliseconds: 500),
+          ),
+        ],
+      ),
     );
   }
 
