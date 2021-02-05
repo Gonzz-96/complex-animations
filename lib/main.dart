@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:complex_animations/widgets/ditto_animations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,18 +25,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AnimatedContainerScreen extends StatefulWidget {
-  @override
-  _AnimatedContainerScreenState createState() =>
-      _AnimatedContainerScreenState();
-}
-
-class _AnimatedContainerScreenState extends State<AnimatedContainerScreen> {
+class AnimatedContainerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: AnimatedDitto(),
+      body: ListView(
+        children: [
+          AnimatedOpacityDitto(),
+          SizedBox(height: 30),
+          AnimatedContainerDitto(),
+          SizedBox(height: 30),
+          AnimatedDecorationDitto(),
+          SizedBox(height: 30),
+          DancingDitto(),
+        ],
       ),
       backgroundColor: Colors.white,
     );
