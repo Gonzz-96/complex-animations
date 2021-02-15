@@ -59,3 +59,51 @@ class _ColorTweenDittoState extends State<ColorTweenDitto> {
     });
   }
 }
+
+//
+// FIGURE 3. Ditto's movement with custom tween.
+//
+class PointTweenDitto extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: Tween<Point>(
+        begin: Point(0, 0),
+        end: Point(200, 200),
+      ),
+      duration: Duration(seconds: 3),
+      child: Image.asset('assets/ditto.png'),
+      builder: (_, Point point, child) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              child: child,
+              bottom: point.y,
+              left: point.x,
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+class Point {
+  final double x;
+  final double y;
+
+  Point(this.x, this.y);
+
+  Point operator +(Point point) {
+    return Point(this.x + point.x, this.y + point.y);
+  }
+
+  Point operator -(Point point) {
+    return Point(this.x - point.x, this.y - point.y);
+  }
+
+  Point operator *(double scalar) {
+    return Point(this.x * scalar, this.y * scalar);
+  }
+}
