@@ -1,5 +1,4 @@
 import 'package:complex_animations/screens/splash_screen.dart';
-import 'package:complex_animations/widgets/ditto_tween_animations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,16 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CustomImplicitAnimationsScreen(),
-    );
-  }
-}
-
-class CustomImplicitAnimationsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: PointTweenDitto()),
+      home: SplashScreen(),
     );
   }
 }
