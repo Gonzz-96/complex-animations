@@ -9,7 +9,7 @@ class StatelessColorTweenDitto extends StatelessWidget {
     return TweenAnimationBuilder(
       tween: ColorTween(begin: Colors.blueAccent, end: Colors.redAccent),
       duration: Duration(seconds: 2),
-      builder: (context, color, child) {
+      builder: (context, dynamic color, child) {
         return Container(
           child: Image.asset('assets/ditto.png'),
           color: color,
@@ -36,7 +36,7 @@ class _ColorTweenDittoState extends State<ColorTweenDitto> {
       tween: ColorTween(begin: Colors.blueAccent, end: _backgroundColor),
       duration: Duration(seconds: 2),
       child: Image.asset('assets/ditto.png'),
-      builder: (context, color, child) {
+      builder: (context, dynamic color, child) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -78,7 +78,7 @@ class PointTweenDitto extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Positioned(
-              child: child,
+              child: child!,
               bottom: point.y,
               left: point.x,
             )

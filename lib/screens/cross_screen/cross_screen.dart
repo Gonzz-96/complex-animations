@@ -11,7 +11,7 @@ class CrossScreen extends StatefulWidget {
 
 class _CrossScreenState extends State<CrossScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -50,8 +50,8 @@ class _CrossScreenState extends State<CrossScreen>
 
 class _CirclesCanvas extends StatelessWidget {
   const _CirclesCanvas({
-    @required this.squareSize,
-    @required this.space,
+    required this.squareSize,
+    required this.space,
   });
 
   final double squareSize;

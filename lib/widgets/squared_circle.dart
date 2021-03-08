@@ -8,7 +8,7 @@ class SquaredCircle extends StatelessWidget {
   final double sweepAngle;
 
   const SquaredCircle({
-    @required this.squareSize,
+    required this.squareSize,
     this.rotationAngle = 0,
     this.sweepAngle = Math.pi * 2,
   });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ScreenItem extends StatelessWidget {
   const ScreenItem({
-    @required this.entry,
+    required this.entry,
     this.shouldHaveDivider = false,
   });
 

@@ -8,7 +8,7 @@ class SquaredCircleScreen extends StatefulWidget {
 
 class _SquaredCircleScreenState extends State<SquaredCircleScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {

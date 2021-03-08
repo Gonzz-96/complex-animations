@@ -11,9 +11,9 @@ class SquaredCircleAnimation extends StatelessWidget {
   final Animation<double> controller;
 
   SquaredCircleAnimation({
-    @required this.squareSize,
-    @required this.space,
-    @required this.controller,
+    required this.squareSize,
+    required this.space,
+    required this.controller,
   })  : _counterClockwiseRotation =
             Tween(begin: 0.0, end: -Math.pi / 2).animate(
           CurvedAnimation(
@@ -45,7 +45,7 @@ class SquaredCircleAnimation extends StatelessWidget {
     return AnimatedBuilder(animation: controller, builder: _getWidgetTree);
   }
 
-  Widget _getWidgetTree(BuildContext context, Widget child) {
+  Widget _getWidgetTree(BuildContext context, Widget? child) {
     return Transform.rotate(
       angle: _counterClockwiseRotation.value + _clockwiseRotation.value,
       child: Column(

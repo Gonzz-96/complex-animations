@@ -147,8 +147,8 @@ class DancingDitto extends StatefulWidget {
 }
 
 class _DancingDittoState extends State<DancingDitto> {
-  Timer periodicTimer;
-  Timer timer;
+  late Timer periodicTimer;
+  late Timer timer;
 
   int currentIndex = 0;
   final dittoValues = [
