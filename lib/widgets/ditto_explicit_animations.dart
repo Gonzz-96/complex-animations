@@ -47,3 +47,38 @@ class _ForeverSpinningDittoState extends State<ForeverSpinningDitto> {
   }
 }
 
+class DittoRotationTransition extends StatefulWidget {
+  @override
+  _DittoRotationTransitionState createState() =>
+      _DittoRotationTransitionState();
+}
+
+class _DittoRotationTransitionState extends State<DittoRotationTransition>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 5),
+      vsync: this,
+    );
+
+    controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      child: Image.asset('assets/ditto.png'),
+      turns: controller,
+    );
+  }
+}
