@@ -64,8 +64,6 @@ class _DittoRotationTransitionState extends State<DittoRotationTransition>
       duration: Duration(seconds: 5),
       vsync: this,
     );
-
-    controller.repeat();
   }
 
   @override
@@ -74,11 +72,31 @@ class _DittoRotationTransitionState extends State<DittoRotationTransition>
     super.dispose();
   }
 
+  void _stopOrStartAnimation() {
+    if (controller.isAnimating) {
+      controller.stop();
+    } else {
+      controller.repeat();
+    }
+  }
+
+  void _invertAnimationDirection() {
+    if (controller.status == AnimationStatus.reverse) {
+      controller.repeat();
+    } else if (controller.status == AnimationStatus.forward) {
+      controller.reverse();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return RotationTransition(
-      child: Image.asset('assets/ditto.png'),
-      turns: controller,
+    return InkWell(
+      onTap: _stopOrStartAnimation,
+      onLongPress: _invertAnimationDirection,
+      child: RotationTransition(
+        child: Image.asset('assets/ditto.png'),
+        turns: controller,
+      ),
     );
   }
 }
