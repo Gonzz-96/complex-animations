@@ -3,6 +3,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+//
+// Figure 1. Forever spinning Ditto.
+//
 class ForeverSpinningDitto extends StatefulWidget {
   @override
   _ForeverSpinningDittoState createState() => _ForeverSpinningDittoState();
@@ -47,6 +50,9 @@ class _ForeverSpinningDittoState extends State<ForeverSpinningDitto> {
   }
 }
 
+//
+// Figure 2. RotationTransitionDitto in action.
+//
 class DittoRotationTransition extends StatefulWidget {
   @override
   _DittoRotationTransitionState createState() =>
@@ -97,6 +103,56 @@ class _DittoRotationTransitionState extends State<DittoRotationTransition>
         child: Image.asset('assets/ditto.png'),
         turns: controller,
       ),
+    );
+  }
+}
+
+//
+// Figure 3 and 4.
+//
+class DittoSlideTransition extends StatefulWidget {
+  @override
+  _DittoSlideTransitionState createState() => _DittoSlideTransitionState();
+}
+
+class _DittoSlideTransitionState extends State<DittoSlideTransition>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  late Animation<Offset> offsetAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    );
+
+    offsetAnimation = Tween(
+      begin: Offset.zero,
+      end: Offset(0.0, 1.5),
+    ).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.easeInOutCubic,
+      ),
+    );
+
+    controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      child: Image.asset('assets/ditto.png'),
+      position: offsetAnimation,
     );
   }
 }
