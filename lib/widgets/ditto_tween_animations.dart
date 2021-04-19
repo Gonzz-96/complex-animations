@@ -44,7 +44,7 @@ class _ColorTweenDittoState extends State<ColorTweenDitto> {
               child: child,
               color: color,
             ),
-            FlatButton(onPressed: _changeColor, child: Text('Animate'))
+            TextButton(onPressed: _changeColor, child: Text('Animate'))
           ],
         );
       },

@@ -30,7 +30,7 @@ class _AnimatedOpacityDittoState extends State<AnimatedOpacityDitto> {
               opacity: opacity, // <-- The value
             ),
           ),
-          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+          TextButton(onPressed: _changeOpacity, child: Text('Animate'))
         ],
       ),
     );
@@ -73,7 +73,7 @@ class _AnimatedContainerDittoState extends State<AnimatedContainerDitto> {
               duration: Duration(seconds: 3),
             ),
           ),
-          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+          TextButton(onPressed: _changeOpacity, child: Text('Animate'))
         ],
       ),
     );
@@ -121,7 +121,7 @@ class _AnimatedDecorationDittoState extends State<AnimatedDecorationDitto> {
             child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
             duration: Duration(seconds: 3),
           ),
-          FlatButton(onPressed: _changeOpacity, child: Text('Animate'))
+          TextButton(onPressed: _changeOpacity, child: Text('Animate'))
         ],
       ),
     );
@@ -247,7 +247,7 @@ class _CurvyDittoState extends State<CurvyDitto> {
             child: Image.asset('assets/ditto.png', fit: BoxFit.fill),
             duration: Duration(milliseconds: 800),
           ),
-          FlatButton(onPressed: _changeOpacity, child: Text('Animate')),
+          TextButton(onPressed: _changeOpacity, child: Text('Animate')),
         ],
       ),
     );
